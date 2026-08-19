@@ -14,7 +14,8 @@ export const Route = createFileRoute("/")({
       { property: "og:title", content: "Lumi — palavras e música para o seu momento" },
       {
         property: "og:description",
-        content: "Uma companhia delicada de bem-estar com mensagens e músicas escolhidas para você.",
+        content:
+          "Uma companhia delicada de bem-estar com mensagens e músicas escolhidas para você.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

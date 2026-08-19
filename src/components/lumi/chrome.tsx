@@ -33,9 +33,23 @@ export function SiteHeader() {
             Planos
           </Link>
           {user ? (
-            <Button asChild variant="ink" size="sm">
-              <Link to="/dashboard">Meu espaço</Link>
-            </Button>
+            <>
+              <Link
+                to="/trilha"
+                className="hidden text-sm font-medium text-muted-foreground transition-colors hover:text-foreground md:block"
+              >
+                Minha trilha
+              </Link>
+              <Link
+                to="/perfil"
+                className="hidden text-sm font-medium text-muted-foreground transition-colors hover:text-foreground sm:block"
+              >
+                Perfil
+              </Link>
+              <Button asChild variant="ink" size="sm">
+                <Link to="/dashboard">Meu espaço</Link>
+              </Button>
+            </>
           ) : (
             <>
               <Link

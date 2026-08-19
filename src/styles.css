@@ -52,7 +52,8 @@
   --color-blush: var(--blush);
   --color-petal: var(--petal);
   --color-ring-offset-background: var(--background);
-  --shadow-soft: 0 1px 2px oklch(0.203 0.029 355.9 / 4%), 0 12px 32px -18px oklch(0.203 0.029 355.9 / 18%);
+  --shadow-soft:
+    0 1px 2px oklch(0.203 0.029 355.9 / 4%), 0 12px 32px -18px oklch(0.203 0.029 355.9 / 18%);
   --shadow-glow: 0 12px 30px -12px oklch(0.644 0.246 15.3 / 45%);
   --animate-fade-up: fade-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
   --animate-heart: heart 0.6s ease;
@@ -97,8 +98,8 @@
 @utility soft-gradient {
   background:
     radial-gradient(60% 55% at 50% 0%, var(--petal) 0%, transparent 70%),
-    radial-gradient(40% 40% at 85% 18%, oklch(0.920 0.044 0.3 / 45%) 0%, transparent 70%),
-    radial-gradient(45% 45% at 12% 10%, oklch(0.920 0.044 0.3 / 35%) 0%, transparent 70%);
+    radial-gradient(40% 40% at 85% 18%, oklch(0.92 0.044 0.3 / 45%) 0%, transparent 70%),
+    radial-gradient(45% 45% at 12% 10%, oklch(0.92 0.044 0.3 / 35%) 0%, transparent 70%);
 }
 
 :root {
@@ -140,9 +141,26 @@
     -webkit-font-smoothing: antialiased;
   }
 
+  button,
+  [role="button"],
+  a {
+    cursor: pointer;
+  }
+
   h1,
   h2,
   h3 {
     letter-spacing: -0.02em;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }

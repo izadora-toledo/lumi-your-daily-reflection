@@ -5,6 +5,7 @@ import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Hand, PageShell } from "@/components/lumi/chrome";
 import { LumiLoading, MoodComposer } from "@/components/lumi/MoodComposer";
+import { SafetyPanel } from "@/components/lumi/SafetyPanel";
 import { generatePublicMessage } from "@/lib/lumi.functions";
 
 export const Route = createFileRoute("/experiencia")({
@@ -81,12 +82,7 @@ function Experience() {
               <p className="text-center font-hand text-2xl text-primary">Para você, agora</p>
               <div className="mt-4 rounded-3xl border border-border/70 bg-card p-7 shadow-soft">
                 <p className="text-lg leading-relaxed">{result.message}</p>
-                {result.risk && (
-                  <p className="mt-4 border-t border-border pt-4 text-xs leading-relaxed text-muted-foreground">
-                    A Lumi não substitui atendimento psicológico ou médico. Se você estiver em
-                    perigo agora, procure ajuda imediata.
-                  </p>
-                )}
+                {result.risk && <SafetyPanel />}
               </div>
 
               <div className="mt-5 flex flex-wrap justify-center gap-3">

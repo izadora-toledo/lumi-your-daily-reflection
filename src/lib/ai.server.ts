@@ -20,7 +20,7 @@ export function detectRisk(text: string): boolean {
 }
 
 export const SAFETY_MESSAGE =
-  "O que você contou parece pesado demais para carregar sozinha agora, e isso importa. Fale com alguém de confiança neste momento — no Brasil, o CVV atende de graça pelo 188, 24 horas por dia. Se houver risco imediato, procure um pronto-socorro ou ligue 192.";
+  "O que você contou parece pesado demais para carregar sozinha agora, e isso importa. Sua segurança vem primeiro: procure uma pessoa de confiança e apoio imediato neste momento.";
 
 type ChatMessage = { role: "system" | "user"; content: string };
 
@@ -39,8 +39,12 @@ async function callGateway(messages: ChatMessage[]): Promise<string> {
 
   if (!res.ok) {
     const body = await res.text();
-    if (res.status === 429) throw new Error("A Lumi está recebendo muitos pedidos agora. Tente de novo em instantes.");
-    if (res.status === 402) throw new Error("Os créditos de IA acabaram. Adicione créditos para continuar usando a Lumi.");
+    if (res.status === 429)
+      throw new Error("A Lumi está recebendo muitos pedidos agora. Tente de novo em instantes.");
+    if (res.status === 402)
+      throw new Error(
+        "Os créditos de IA acabaram. Adicione créditos para continuar usando a Lumi.",
+      );
     throw new Error(`Falha ao falar com a IA (${res.status}): ${body.slice(0, 200)}`);
   }
 
@@ -49,7 +53,10 @@ async function callGateway(messages: ChatMessage[]): Promise<string> {
 }
 
 function parseJson<T>(raw: string): T | null {
-  const cleaned = raw.replace(/```json/gi, "").replace(/```/g, "").trim();
+  const cleaned = raw
+    .replace(/```json/gi, "")
+    .replace(/```/g, "")
+    .trim();
   const start = cleaned.indexOf("{");
   const end = cleaned.lastIndexOf("}");
   if (start === -1 || end === -1) return null;
@@ -90,7 +97,10 @@ export async function generateMotivationalMessage(moodText: string): Promise<{
 
   const parsed = parseJson<{ message?: string; mood?: string }>(raw);
   return {
-    message: parsed?.message?.trim() || raw || "Ficou difícil encontrar as palavras agora. Tente de novo em instantes.",
+    message:
+      parsed?.message?.trim() ||
+      raw ||
+      "Ficou difícil encontrar as palavras agora. Tente de novo em instantes.",
     mood: (parsed?.mood ?? "").toString().slice(0, 40) || "indefinido",
     risk: false,
   };

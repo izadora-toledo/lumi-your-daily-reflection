@@ -2,7 +2,6 @@ import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
-import { lovable } from "@/integrations/lovable/index";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -17,9 +16,15 @@ export const Route = createFileRoute("/auth")({
   head: () => ({
     meta: [
       { title: "Entrar na Lumi" },
-      { name: "description", content: "Crie sua conta na Lumi para guardar mensagens e descobrir músicas." },
+      {
+        name: "description",
+        content: "Crie sua conta na Lumi para guardar mensagens e descobrir músicas.",
+      },
       { property: "og:title", content: "Entrar na Lumi" },
-      { property: "og:description", content: "Guarde suas mensagens favoritas e monte a sua trilha." },
+      {
+        property: "og:description",
+        content: "Guarde suas mensagens favoritas e monte a sua trilha.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -34,6 +39,7 @@ function AuthPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const googleEnabled = import.meta.env["VITE_GOOGLE_AUTH_ENABLED"] === "true";
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => {
@@ -70,15 +76,11 @@ function AuthPage() {
   };
 
   const google = async () => {
-    const result = await lovable.auth.signInWithOAuth("google", {
-      redirect_uri: window.location.origin,
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: { redirectTo: `${window.location.origin}/dashboard` },
     });
-    if (result.error) {
-      toast.error("Não consegui entrar com o Google.");
-      return;
-    }
-    if (result.redirected) return;
-    navigate({ to: "/dashboard" });
+    if (error) toast.error("Não consegui entrar com o Google.");
   };
 
   return (
@@ -94,25 +96,48 @@ function AuthPage() {
           {mode === "signup" && (
             <div className="space-y-1.5">
               <Label htmlFor="name">Nome</Label>
-              <Input id="name" value={name} onChange={(e) => setName(e.target.value)} required className="h-11 rounded-2xl" />
+              <Input
+                id="name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+                className="h-11 rounded-2xl"
+              />
             </div>
           )}
           <div className="space-y-1.5">
             <Label htmlFor="email">E-mail</Label>
-            <Input id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required className="h-11 rounded-2xl" />
+            <Input
+              id="email"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              className="h-11 rounded-2xl"
+            />
           </div>
           <div className="space-y-1.5">
             <Label htmlFor="password">Senha</Label>
-            <Input id="password" type="password" minLength={6} value={password} onChange={(e) => setPassword(e.target.value)} required className="h-11 rounded-2xl" />
+            <Input
+              id="password"
+              type="password"
+              minLength={6}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              className="h-11 rounded-2xl"
+            />
           </div>
           <Button type="submit" size="lg" className="w-full" disabled={loading}>
             {loading ? "Um instante..." : mode === "signup" ? "Criar conta" : "Entrar"}
           </Button>
         </form>
 
-        <Button variant="outline" className="mt-3 w-full" onClick={google}>
-          Continuar com Google
-        </Button>
+        {googleEnabled && (
+          <Button variant="outline" className="mt-3 w-full" onClick={google}>
+            Continuar com Google
+          </Button>
+        )}
 
         <p className="mt-6 text-center text-sm text-muted-foreground">
           {mode === "signup" ? "Já tem conta? " : "Ainda não tem conta? "}
