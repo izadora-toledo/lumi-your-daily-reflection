@@ -47,7 +47,7 @@ export function LumiLogo({ className, iconClassName, compact = false }: LumiLogo
         Lum
         <span
           aria-label="i"
-          className="relative inline-block h-[0.78em] w-[0.32em] align-[-0.02em]"
+          className="relative inline-block h-[0.84em] w-[0.32em] align-[-0.02em]"
         >
           <span
             aria-hidden="true"
