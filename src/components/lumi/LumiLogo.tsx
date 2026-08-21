@@ -45,11 +45,17 @@ export function LumiLogo({ className, iconClassName, compact = false }: LumiLogo
         )}
       >
         Lum
-        <span className="relative">
-          i
+        <span
+          aria-label="i"
+          className="relative inline-block h-[0.78em] w-[0.32em] align-[-0.02em]"
+        >
           <span
             aria-hidden="true"
-            className="absolute right-[0.08em] top-[0.08em] h-[0.24em] w-[0.24em] rounded-full bg-primary"
+            className="absolute bottom-0 left-1/2 h-[0.56em] w-[0.22em] -translate-x-1/2 rounded-[0.04em] bg-foreground"
+          />
+          <span
+            aria-hidden="true"
+            className="absolute left-1/2 top-0 h-[0.22em] w-[0.22em] -translate-x-1/2 rounded-full bg-primary"
           />
         </span>
       </span>
