@@ -14,6 +14,36 @@ export type Database = {
   }
   public: {
     Tables: {
+      fortune_cookie_history: {
+        Row: {
+          category: string
+          fortune_date: string
+          fortune_id: number
+          id: string
+          message: string
+          opened_at: string
+          user_id: string
+        }
+        Insert: {
+          category: string
+          fortune_date: string
+          fortune_id: number
+          id?: string
+          message: string
+          opened_at?: string
+          user_id: string
+        }
+        Update: {
+          category?: string
+          fortune_date?: string
+          fortune_id?: number
+          id?: string
+          message?: string
+          opened_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       generated_messages: {
         Row: {
           created_at: string

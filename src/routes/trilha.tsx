@@ -5,6 +5,7 @@ import { CalendarDays, LockKeyhole } from "lucide-react";
 import { toast } from "sonner";
 import { AuthGate } from "@/components/lumi/AuthGate";
 import { MusicCard } from "@/components/lumi/MusicCard";
+import { getLumiErrorMessage } from "@/lib/errors";
 import { Hand, PageShell } from "@/components/lumi/chrome";
 import { Button } from "@/components/ui/button";
 import { formatDay, useProfile, useRecommendations } from "@/lib/data";
@@ -43,7 +44,7 @@ function Trail() {
       await queryClient.invalidateQueries({ queryKey: ["recommendations", user?.id] });
       toast.success("Obrigada! Sua trilha vai ficar cada vez mais com a sua cara.");
     } catch (error) {
-      toast.error(error instanceof Error ? error.message : "Não consegui registrar sua opinião.");
+      toast.error(getLumiErrorMessage(error, "Não consegui registrar sua opinião."));
     }
   };
 

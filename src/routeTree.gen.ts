@@ -11,8 +11,10 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as BiscoitoRouteImport } from './routes/biscoito'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as ExperienciaRouteImport } from './routes/experiencia'
+import { Route as HistoricoRouteImport } from './routes/historico'
 import { Route as OnboardingRouteImport } from './routes/onboarding'
 import { Route as PerfilRouteImport } from './routes/perfil'
 import { Route as PlanosRouteImport } from './routes/planos'
@@ -28,6 +30,11 @@ const AuthRoute = AuthRouteImport.update({
   path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BiscoitoRoute = BiscoitoRouteImport.update({
+  id: '/biscoito',
+  path: '/biscoito',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DashboardRoute = DashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
@@ -36,6 +43,11 @@ const DashboardRoute = DashboardRouteImport.update({
 const ExperienciaRoute = ExperienciaRouteImport.update({
   id: '/experiencia',
   path: '/experiencia',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HistoricoRoute = HistoricoRouteImport.update({
+  id: '/historico',
+  path: '/historico',
   getParentRoute: () => rootRouteImport,
 } as any)
 const OnboardingRoute = OnboardingRouteImport.update({
@@ -62,8 +74,10 @@ const TrilhaRoute = TrilhaRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/biscoito': typeof BiscoitoRoute
   '/dashboard': typeof DashboardRoute
   '/experiencia': typeof ExperienciaRoute
+  '/historico': typeof HistoricoRoute
   '/onboarding': typeof OnboardingRoute
   '/perfil': typeof PerfilRoute
   '/planos': typeof PlanosRoute
@@ -72,8 +86,10 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/biscoito': typeof BiscoitoRoute
   '/dashboard': typeof DashboardRoute
   '/experiencia': typeof ExperienciaRoute
+  '/historico': typeof HistoricoRoute
   '/onboarding': typeof OnboardingRoute
   '/perfil': typeof PerfilRoute
   '/planos': typeof PlanosRoute
@@ -83,8 +99,10 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/biscoito': typeof BiscoitoRoute
   '/dashboard': typeof DashboardRoute
   '/experiencia': typeof ExperienciaRoute
+  '/historico': typeof HistoricoRoute
   '/onboarding': typeof OnboardingRoute
   '/perfil': typeof PerfilRoute
   '/planos': typeof PlanosRoute
@@ -95,8 +113,10 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/auth'
+    | '/biscoito'
     | '/dashboard'
     | '/experiencia'
+    | '/historico'
     | '/onboarding'
     | '/perfil'
     | '/planos'
@@ -105,8 +125,10 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/auth'
+    | '/biscoito'
     | '/dashboard'
     | '/experiencia'
+    | '/historico'
     | '/onboarding'
     | '/perfil'
     | '/planos'
@@ -115,8 +137,10 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/auth'
+    | '/biscoito'
     | '/dashboard'
     | '/experiencia'
+    | '/historico'
     | '/onboarding'
     | '/perfil'
     | '/planos'
@@ -126,8 +150,10 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthRoute: typeof AuthRoute
+  BiscoitoRoute: typeof BiscoitoRoute
   DashboardRoute: typeof DashboardRoute
   ExperienciaRoute: typeof ExperienciaRoute
+  HistoricoRoute: typeof HistoricoRoute
   OnboardingRoute: typeof OnboardingRoute
   PerfilRoute: typeof PerfilRoute
   PlanosRoute: typeof PlanosRoute
@@ -150,6 +176,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/biscoito': {
+      id: '/biscoito'
+      path: '/biscoito'
+      fullPath: '/biscoito'
+      preLoaderRoute: typeof BiscoitoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/dashboard': {
       id: '/dashboard'
       path: '/dashboard'
@@ -162,6 +195,13 @@ declare module '@tanstack/react-router' {
       path: '/experiencia'
       fullPath: '/experiencia'
       preLoaderRoute: typeof ExperienciaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/historico': {
+      id: '/historico'
+      path: '/historico'
+      fullPath: '/historico'
+      preLoaderRoute: typeof HistoricoRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/onboarding': {
@@ -198,8 +238,10 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthRoute: AuthRoute,
+  BiscoitoRoute: BiscoitoRoute,
   DashboardRoute: DashboardRoute,
   ExperienciaRoute: ExperienciaRoute,
+  HistoricoRoute: HistoricoRoute,
   OnboardingRoute: OnboardingRoute,
   PerfilRoute: PerfilRoute,
   PlanosRoute: PlanosRoute,

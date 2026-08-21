@@ -7,6 +7,7 @@ import { Hand, PageShell } from "@/components/lumi/chrome";
 import { LumiLoading, MoodComposer } from "@/components/lumi/MoodComposer";
 import { SafetyPanel } from "@/components/lumi/SafetyPanel";
 import { generatePublicMessage } from "@/lib/lumi.functions";
+import { getLumiErrorMessage } from "@/lib/errors";
 
 export const Route = createFileRoute("/experiencia")({
   head: () => ({
@@ -49,7 +50,7 @@ function Experience() {
       setResult({ message: res.message, risk: res.risk });
       setStage("result");
     } catch (error) {
-      toast.error(error instanceof Error ? error.message : "Algo deu errado.");
+      toast.error(getLumiErrorMessage(error, "Não consegui criar sua mensagem agora."));
       setStage("mood");
     }
   };

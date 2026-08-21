@@ -23,6 +23,7 @@ const freeBenefits = [
   "Até 3 mensagens personalizadas por dia",
   "Escreva livremente como está se sentindo",
   "Salve até 5 mensagens favoritas",
+  "Um biscoito da sorte por dia",
 ];
 
 const proBenefits = [
@@ -31,6 +32,8 @@ const proBenefits = [
   "Escolha baseada no sentimento e no seu gosto",
   "Explicação do motivo de cada música",
   "Histórico da sua trilha",
+  "Histórico dos seus biscoitos da sorte",
+  "Histórico do que você escreveu e recebeu",
   "Mensagens favoritas ilimitadas",
 ];
 

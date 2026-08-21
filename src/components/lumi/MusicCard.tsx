@@ -10,6 +10,11 @@ type Recommendation = {
   feedback: string | null;
 };
 
+function youtubeSearchUrl(song: string, artist: string) {
+  const query = new URLSearchParams({ search_query: `${song} ${artist}` });
+  return `https://www.youtube.com/results?${query.toString()}`;
+}
+
 export function MusicCard({
   recommendation,
   onFeedback,
@@ -28,11 +33,32 @@ export function MusicCard({
         <div className="min-w-0 flex-1">
           <p className="truncate text-lg font-semibold">{recommendation.song}</p>
           <p className="truncate text-sm text-muted-foreground">{recommendation.artist}</p>
-          <Button asChild variant="link" className="mt-1 h-auto justify-start px-0 py-1">
-            <a href={recommendation.spotify_url} target="_blank" rel="noreferrer">
-              Ouvir no Spotify <ExternalLink aria-hidden="true" />
-            </a>
-          </Button>
+          <div className="mt-2 flex flex-col items-start gap-1">
+            <Button
+              asChild
+              variant="link"
+              className="h-auto justify-start whitespace-normal px-0 py-1 text-left"
+            >
+              <a href={recommendation.spotify_url} target="_blank" rel="noreferrer">
+                Ouvir no Spotify — {recommendation.song}
+                <ExternalLink aria-hidden="true" />
+              </a>
+            </Button>
+            <Button
+              asChild
+              variant="link"
+              className="h-auto justify-start whitespace-normal px-0 py-1 text-left"
+            >
+              <a
+                href={youtubeSearchUrl(recommendation.song, recommendation.artist)}
+                target="_blank"
+                rel="noreferrer"
+              >
+                Ouvir no YouTube — {recommendation.song}
+                <ExternalLink aria-hidden="true" />
+              </a>
+            </Button>
+          </div>
         </div>
       </div>
 

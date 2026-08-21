@@ -2,7 +2,7 @@ import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
-import { Heart, LockKeyhole, Sparkles } from "lucide-react";
+import { BookHeart, Heart, LockKeyhole, Sparkles } from "lucide-react";
 import { toast } from "sonner";
 import { AuthGate } from "@/components/lumi/AuthGate";
 import { MusicCard } from "@/components/lumi/MusicCard";
@@ -11,6 +11,7 @@ import { LumiLoading, MoodComposer } from "@/components/lumi/MoodComposer";
 import { Hand, PageShell } from "@/components/lumi/chrome";
 import { Button } from "@/components/ui/button";
 import { useMessages, useProfile, useRecommendations } from "@/lib/data";
+import { getLumiErrorMessage } from "@/lib/errors";
 import { generateForUser, setMessageFavorite, setMusicFeedback } from "@/lib/lumi.functions";
 import { useSession } from "@/lib/session";
 
@@ -82,7 +83,7 @@ function Dashboard() {
         queryClient.invalidateQueries({ queryKey: ["recommendations", user?.id] }),
       ]);
     } catch (error) {
-      toast.error(error instanceof Error ? error.message : "Não consegui gerar sua mensagem.");
+      toast.error(getLumiErrorMessage(error, "Não consegui gerar sua mensagem."));
     } finally {
       setGenerating(false);
     }
@@ -97,7 +98,7 @@ function Dashboard() {
       await queryClient.invalidateQueries({ queryKey: ["messages", user?.id] });
       toast.success(next ? "Mensagem guardada." : "Mensagem removida dos favoritos.");
     } catch (error) {
-      toast.error(error instanceof Error ? error.message : "Não consegui guardar a mensagem.");
+      toast.error(getLumiErrorMessage(error, "Não consegui guardar a mensagem."));
     }
   };
 
@@ -115,7 +116,7 @@ function Dashboard() {
       );
       toast.success("Obrigada! Vou aprender com essa escolha.");
     } catch (error) {
-      toast.error(error instanceof Error ? error.message : "Não consegui registrar sua opinião.");
+      toast.error(getLumiErrorMessage(error, "Não consegui registrar sua opinião."));
     }
   };
 
@@ -130,9 +131,18 @@ function Dashboard() {
                 Oi, {profile?.name?.split(" ")[0] || "você"}. Como você está hoje?
               </h1>
             </div>
-            <span className="w-fit rounded-full border border-border bg-card px-3 py-1.5 text-xs font-semibold text-muted-foreground">
-              {isPro ? "Lumi Pro" : `${todayCount}/3 mensagens hoje`}
-            </span>
+            <div className="flex flex-wrap items-center gap-2">
+              {isPro && (
+                <Button asChild variant="outline" size="sm">
+                  <Link to="/historico">
+                    <BookHeart aria-hidden="true" /> Meu histórico
+                  </Link>
+                </Button>
+              )}
+              <span className="w-fit rounded-full border border-border bg-card px-3 py-1.5 text-xs font-semibold text-muted-foreground">
+                {isPro ? "Lumi Pro" : `${todayCount}/3 mensagens hoje`}
+              </span>
+            </div>
           </div>
 
           <div className="mt-8 rounded-3xl border border-border/70 bg-card p-5 shadow-soft sm:p-7">

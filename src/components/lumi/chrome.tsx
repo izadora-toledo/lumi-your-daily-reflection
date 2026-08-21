@@ -27,6 +27,12 @@ export function SiteHeader() {
         <LumiMark />
         <nav className="flex items-center gap-2 sm:gap-4">
           <Link
+            to="/biscoito"
+            className="hidden text-sm font-medium text-muted-foreground transition-colors hover:text-foreground sm:block"
+          >
+            Biscoito da sorte
+          </Link>
+          <Link
             to="/planos"
             className="hidden text-sm font-medium text-muted-foreground transition-colors hover:text-foreground sm:block"
           >
@@ -60,7 +66,9 @@ export function SiteHeader() {
                 Entrar
               </Link>
               <Button asChild variant="ink" size="sm">
-                <Link to="/experiencia">Começar</Link>
+                <Link to="/auth" search={{ mode: "login" }}>
+                  Começar
+                </Link>
               </Button>
             </>
           )}

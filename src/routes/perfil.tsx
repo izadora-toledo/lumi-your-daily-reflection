@@ -1,6 +1,7 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
+import { getLumiErrorMessage } from "@/lib/errors";
 import { AuthGate } from "@/components/lumi/AuthGate";
 import { Hand, PageShell } from "@/components/lumi/chrome";
 import { Button } from "@/components/ui/button";
@@ -82,7 +83,7 @@ function ProfileForm() {
       const { error } = await supabase.auth.updateUser({ email: email.trim() });
       if (error) {
         setSaving(false);
-        toast.error(error.message);
+        toast.error(getLumiErrorMessage(error, "Não consegui atualizar seu e-mail."));
         return;
       }
     }

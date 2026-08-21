@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Hand, LumiMark } from "@/components/lumi/chrome";
+import { getLumiErrorMessage } from "@/lib/errors";
 
 type Mode = "login" | "signup";
 
@@ -59,7 +60,7 @@ function AuthPage() {
         });
         if (error) throw error;
         if (!data.session) {
-          toast.success("Confira seu e-mail para confirmar o cadastro.");
+          toast.success("Conta criada com sucesso. Confirme no e-mail.");
           return;
         }
         navigate({ to: "/onboarding" });
@@ -69,7 +70,7 @@ function AuthPage() {
         navigate({ to: "/dashboard" });
       }
     } catch (error) {
-      toast.error(error instanceof Error ? error.message : "Não consegui continuar agora.");
+      toast.error(getLumiErrorMessage(error, "Não consegui continuar agora. Tente novamente."));
     } finally {
       setLoading(false);
     }
