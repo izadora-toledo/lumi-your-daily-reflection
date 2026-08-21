@@ -1,19 +1,17 @@
 import { Link } from "@tanstack/react-router";
 import type { ReactNode } from "react";
 import { Button } from "@/components/ui/button";
+import { LumiLogo } from "@/components/lumi/LumiLogo";
 import { useSession } from "@/lib/session";
 
 export function LumiMark({ size = "md" }: { size?: "sm" | "md" }) {
   return (
-    <Link to="/" className="flex items-center gap-2.5">
-      <span
-        className={`flex items-center justify-center rounded-full bg-primary font-bold text-primary-foreground ${
-          size === "sm" ? "h-7 w-7 text-xs" : "h-9 w-9 text-sm"
-        }`}
-      >
-        L
-      </span>
-      <span className="text-lg font-semibold tracking-tight">Lumi</span>
+    <Link
+      to="/"
+      aria-label="Lumi — página inicial"
+      className="rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4"
+    >
+      <LumiLogo compact={size === "sm"} />
     </Link>
   );
 }
