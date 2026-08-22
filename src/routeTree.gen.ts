@@ -11,7 +11,14 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as BiscoitoRouteImport } from './routes/biscoito'
+import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as ExperienciaRouteImport } from './routes/experiencia'
+import { Route as HistoricoRouteImport } from './routes/historico'
+import { Route as OnboardingRouteImport } from './routes/onboarding'
+import { Route as PerfilRouteImport } from './routes/perfil'
+import { Route as PlanosRouteImport } from './routes/planos'
+import { Route as TrilhaRouteImport } from './routes/trilha'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -23,40 +30,134 @@ const AuthRoute = AuthRouteImport.update({
   path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BiscoitoRoute = BiscoitoRouteImport.update({
+  id: '/biscoito',
+  path: '/biscoito',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardRoute = DashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ExperienciaRoute = ExperienciaRouteImport.update({
   id: '/experiencia',
   path: '/experiencia',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HistoricoRoute = HistoricoRouteImport.update({
+  id: '/historico',
+  path: '/historico',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OnboardingRoute = OnboardingRouteImport.update({
+  id: '/onboarding',
+  path: '/onboarding',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PerfilRoute = PerfilRouteImport.update({
+  id: '/perfil',
+  path: '/perfil',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PlanosRoute = PlanosRouteImport.update({
+  id: '/planos',
+  path: '/planos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TrilhaRoute = TrilhaRouteImport.update({
+  id: '/trilha',
+  path: '/trilha',
   getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/biscoito': typeof BiscoitoRoute
+  '/dashboard': typeof DashboardRoute
   '/experiencia': typeof ExperienciaRoute
+  '/historico': typeof HistoricoRoute
+  '/onboarding': typeof OnboardingRoute
+  '/perfil': typeof PerfilRoute
+  '/planos': typeof PlanosRoute
+  '/trilha': typeof TrilhaRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/biscoito': typeof BiscoitoRoute
+  '/dashboard': typeof DashboardRoute
   '/experiencia': typeof ExperienciaRoute
+  '/historico': typeof HistoricoRoute
+  '/onboarding': typeof OnboardingRoute
+  '/perfil': typeof PerfilRoute
+  '/planos': typeof PlanosRoute
+  '/trilha': typeof TrilhaRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/biscoito': typeof BiscoitoRoute
+  '/dashboard': typeof DashboardRoute
   '/experiencia': typeof ExperienciaRoute
+  '/historico': typeof HistoricoRoute
+  '/onboarding': typeof OnboardingRoute
+  '/perfil': typeof PerfilRoute
+  '/planos': typeof PlanosRoute
+  '/trilha': typeof TrilhaRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth' | '/experiencia'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/biscoito'
+    | '/dashboard'
+    | '/experiencia'
+    | '/historico'
+    | '/onboarding'
+    | '/perfil'
+    | '/planos'
+    | '/trilha'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/experiencia'
-  id: '__root__' | '/' | '/auth' | '/experiencia'
+  to:
+    | '/'
+    | '/auth'
+    | '/biscoito'
+    | '/dashboard'
+    | '/experiencia'
+    | '/historico'
+    | '/onboarding'
+    | '/perfil'
+    | '/planos'
+    | '/trilha'
+  id:
+    | '__root__'
+    | '/'
+    | '/auth'
+    | '/biscoito'
+    | '/dashboard'
+    | '/experiencia'
+    | '/historico'
+    | '/onboarding'
+    | '/perfil'
+    | '/planos'
+    | '/trilha'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthRoute: typeof AuthRoute
+  BiscoitoRoute: typeof BiscoitoRoute
+  DashboardRoute: typeof DashboardRoute
   ExperienciaRoute: typeof ExperienciaRoute
+  HistoricoRoute: typeof HistoricoRoute
+  OnboardingRoute: typeof OnboardingRoute
+  PerfilRoute: typeof PerfilRoute
+  PlanosRoute: typeof PlanosRoute
+  TrilhaRoute: typeof TrilhaRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -75,11 +176,60 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/biscoito': {
+      id: '/biscoito'
+      path: '/biscoito'
+      fullPath: '/biscoito'
+      preLoaderRoute: typeof BiscoitoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/experiencia': {
       id: '/experiencia'
       path: '/experiencia'
       fullPath: '/experiencia'
       preLoaderRoute: typeof ExperienciaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/historico': {
+      id: '/historico'
+      path: '/historico'
+      fullPath: '/historico'
+      preLoaderRoute: typeof HistoricoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/onboarding': {
+      id: '/onboarding'
+      path: '/onboarding'
+      fullPath: '/onboarding'
+      preLoaderRoute: typeof OnboardingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/perfil': {
+      id: '/perfil'
+      path: '/perfil'
+      fullPath: '/perfil'
+      preLoaderRoute: typeof PerfilRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/planos': {
+      id: '/planos'
+      path: '/planos'
+      fullPath: '/planos'
+      preLoaderRoute: typeof PlanosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/trilha': {
+      id: '/trilha'
+      path: '/trilha'
+      fullPath: '/trilha'
+      preLoaderRoute: typeof TrilhaRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -88,7 +238,14 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthRoute: AuthRoute,
+  BiscoitoRoute: BiscoitoRoute,
+  DashboardRoute: DashboardRoute,
   ExperienciaRoute: ExperienciaRoute,
+  HistoricoRoute: HistoricoRoute,
+  OnboardingRoute: OnboardingRoute,
+  PerfilRoute: PerfilRoute,
+  PlanosRoute: PlanosRoute,
+  TrilhaRoute: TrilhaRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

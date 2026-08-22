@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import { Hand, PageShell } from "@/components/lumi/chrome";
+import { useSession } from "@/lib/session";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -14,7 +15,8 @@ export const Route = createFileRoute("/")({
       { property: "og:title", content: "Lumi — palavras e música para o seu momento" },
       {
         property: "og:description",
-        content: "Uma companhia delicada de bem-estar com mensagens e músicas escolhidas para você.",
+        content:
+          "Uma companhia delicada de bem-estar com mensagens e músicas escolhidas para você.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -42,6 +44,8 @@ const pillars = [
 ];
 
 function Index() {
+  const { user, loading } = useSession();
+
   return (
     <PageShell>
       <section className="soft-gradient relative overflow-hidden px-5 pb-20 pt-16 sm:pt-24">
@@ -57,11 +61,43 @@ function Index() {
             especialmente para esse momento.
           </p>
           <div className="mt-9">
-            <Button asChild size="lg">
-              <Link to="/experiencia">Quero minha mensagem</Link>
-            </Button>
+            {loading ? (
+              <Button size="lg" disabled>
+                Quero minha mensagem
+              </Button>
+            ) : user ? (
+              <Button asChild size="lg">
+                <Link to="/experiencia">Quero minha mensagem</Link>
+              </Button>
+            ) : (
+              <Button asChild size="lg">
+                <Link to="/auth" search={{ mode: "login" }}>
+                  Quero minha mensagem
+                </Link>
+              </Button>
+            )}
           </div>
           <p className="mt-4 text-xs text-muted-foreground">Leva menos de um minuto.</p>
+        </div>
+      </section>
+
+      <section className="mx-auto -mt-6 mb-14 max-w-3xl px-5">
+        <div className="flex flex-col items-center justify-between gap-5 rounded-3xl border border-primary/15 bg-card p-6 text-center shadow-soft sm:flex-row sm:text-left">
+          <div className="flex items-center gap-4">
+            <span className="text-4xl" aria-hidden="true">
+              🥠
+            </span>
+            <div>
+              <p className="font-hand text-xl text-primary">uma surpresa por dia</p>
+              <h2 className="text-lg font-bold">Abra seu biscoito da sorte</h2>
+              <p className="mt-1 text-xs text-muted-foreground">
+                Gratuito e disponível mesmo sem uma conta.
+              </p>
+            </div>
+          </div>
+          <Button asChild variant="outline">
+            <Link to="/biscoito">Abrir meu biscoito</Link>
+          </Button>
         </div>
       </section>
 

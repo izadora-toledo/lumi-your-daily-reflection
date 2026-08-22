@@ -1,0 +1,8 @@
+<svg width="560" height="152" viewBox="0 0 560 152" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M92 84C63 80 32 59 24 24C56 23 84 46 92 84Z" stroke="#FF1F5B" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M102 84C131 80 162 59 170 24C138 23 110 46 102 84Z" stroke="#FF1F5B" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="97" cy="120" r="20" fill="#FF1F5B"/>
+  <text x="208" y="119" fill="#201014" font-family="Manrope, Inter, Arial, sans-serif" font-size="96" font-weight="700" letter-spacing="-5">Lum</text>
+  <rect x="430" y="65" width="22" height="55" rx="3" fill="#201014"/>
+  <circle cx="441" cy="45" r="11" fill="#FF1F5B"/>
+</svg>

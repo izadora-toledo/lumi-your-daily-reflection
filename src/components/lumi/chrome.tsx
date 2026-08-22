@@ -1,19 +1,17 @@
 import { Link } from "@tanstack/react-router";
 import type { ReactNode } from "react";
 import { Button } from "@/components/ui/button";
+import { LumiLogo } from "@/components/lumi/LumiLogo";
 import { useSession } from "@/lib/session";
 
 export function LumiMark({ size = "md" }: { size?: "sm" | "md" }) {
   return (
-    <Link to="/" className="flex items-center gap-2.5">
-      <span
-        className={`flex items-center justify-center rounded-full bg-primary font-bold text-primary-foreground ${
-          size === "sm" ? "h-7 w-7 text-xs" : "h-9 w-9 text-sm"
-        }`}
-      >
-        L
-      </span>
-      <span className="text-lg font-semibold tracking-tight">Lumi</span>
+    <Link
+      to="/"
+      aria-label="Lumi — página inicial"
+      className="rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4"
+    >
+      <LumiLogo compact={size === "sm"} />
     </Link>
   );
 }
@@ -27,15 +25,35 @@ export function SiteHeader() {
         <LumiMark />
         <nav className="flex items-center gap-2 sm:gap-4">
           <Link
+            to="/biscoito"
+            className="hidden text-sm font-medium text-muted-foreground transition-colors hover:text-foreground sm:block"
+          >
+            Biscoito da sorte
+          </Link>
+          <Link
             to="/planos"
             className="hidden text-sm font-medium text-muted-foreground transition-colors hover:text-foreground sm:block"
           >
             Planos
           </Link>
           {user ? (
-            <Button asChild variant="ink" size="sm">
-              <Link to="/dashboard">Meu espaço</Link>
-            </Button>
+            <>
+              <Link
+                to="/trilha"
+                className="hidden text-sm font-medium text-muted-foreground transition-colors hover:text-foreground md:block"
+              >
+                Minha trilha
+              </Link>
+              <Link
+                to="/perfil"
+                className="hidden text-sm font-medium text-muted-foreground transition-colors hover:text-foreground sm:block"
+              >
+                Perfil
+              </Link>
+              <Button asChild variant="ink" size="sm">
+                <Link to="/dashboard">Meu espaço</Link>
+              </Button>
+            </>
           ) : (
             <>
               <Link
@@ -46,7 +64,9 @@ export function SiteHeader() {
                 Entrar
               </Link>
               <Button asChild variant="ink" size="sm">
-                <Link to="/experiencia">Começar</Link>
+                <Link to="/auth" search={{ mode: "login" }}>
+                  Começar
+                </Link>
               </Button>
             </>
           )}
