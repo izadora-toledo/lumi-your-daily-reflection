@@ -98,7 +98,7 @@ export function PrefsForm({
           max={5}
           step={1}
           value={[p.discovery_level]}
-          onValueChange={([v]) => setP({ ...p, discovery_level: v })}
+          onValueChange={([v]) => setP({ ...p, discovery_level: v ?? 3 })}
         />
         <div className="mt-2 flex justify-between text-xs text-muted-foreground">
           <span>Prefiro o que conheço</span>

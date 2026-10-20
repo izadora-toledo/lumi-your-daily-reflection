@@ -36,10 +36,12 @@ export function SongCard({ rec }: { rec: Rec }) {
             <a href={rec.spotify_url} target="_blank" rel="noreferrer">Ouvir no Spotify</a>
           </Button>
         )}
-        {[
-          ["gostei", "Gostei"],
-          ["nao_combinou", "Não combinou"],
-        ].map(([v, l]) => (
+        {(
+          [
+            ["gostei", "Gostei"],
+            ["nao_combinou", "Não combinou"],
+          ] as const
+        ).map(([v, l]) => (
           <Button key={v} size="sm" variant={feedback === v ? "default" : "outline"} onClick={() => send(v)}>
             {l}
           </Button>
