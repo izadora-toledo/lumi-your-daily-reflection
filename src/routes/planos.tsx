@@ -76,10 +76,7 @@ function PlansPage() {
                 ))}
               </ul>
               <Button asChild variant="outline" size="lg" className="mt-9 w-full">
-                <Link
-                  to={user ? "/dashboard" : "/auth"}
-                  search={user ? undefined : { mode: "signup" }}
-                >
+                <Link to={user ? "/dashboard" : "/auth"} search={{ mode: "signup" } as never}>
                   {profile?.plan === "free" ? "Seu plano atual" : "Começar grátis"}
                 </Link>
               </Button>
